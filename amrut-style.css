@@ -1,0 +1,227 @@
+/* Amrut Blog Style – July 2025 + GitHub Extension (English Main) */
+
+/* ✅ Base Post Container */
+.amrut-post-container {
+  font-size: 18px;
+  line-height: 1.85;
+  font-family: 'Segoe UI', sans-serif;
+  color: #2a2a2a;
+  padding: 0 4px;
+}
+
+/* Headings */
+.amrut-post-container h1 {
+  text-align: left;
+  color: #0b5394;
+  text-decoration: underline;
+  margin: 24px 0 28px;
+  padding: 0;
+  line-height: 1.5;
+}
+.amrut-post-container h2 {
+  font-size: 22px;
+  color: #1c1c1c;
+  margin: 28px 0 14px;
+  font-weight: bold;
+}
+
+/* Lists */
+.amrut-post-container ul,
+.amrut-post-container ol { margin-left: 20px; margin-bottom: 20px; }
+.amrut-post-container ul li,
+.amrut-post-container ol li { margin-bottom: 10px; }
+
+/* Tables */
+.amrut-post-container table {
+  margin: 20px 0;
+  border: 1px solid #ddd;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  border-collapse: collapse;
+}
+.amrut-post-container table th,
+.amrut-post-container table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+.amrut-post-container table th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+/* Blockquotes */
+.amrut-post-container blockquote {
+  background-color: #f0f8ff;
+  border-left: 4px solid #007acc;
+  margin: 20px 0;
+  padding: 14px 20px;
+  font-style: italic;
+  color: #003366;
+}
+
+/* GitHub-style Code */
+.amrut-post-container pre,
+.amrut-post-container code {
+  font-family: 'Courier New', monospace;
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 4px 6px;
+}
+.amrut-post-container pre {
+  padding: 12px;
+  overflow-x: auto;
+}
+
+/* GitHub-style Links */
+.amrut-post-container a {
+  color: #0969da;
+  text-decoration: none;
+}
+.amrut-post-container a:hover {
+  color: #0550ae;
+  text-decoration: underline;
+}
+
+/* Table of Contents */
+.toc-wrap {
+  background: #f7fbff;
+  border: 1px solid #d7eafe;
+  padding: 16px 18px;
+  border-radius: 8px;
+  margin: 18px 0 26px;
+}
+.toc-wrap .toc-title { font-weight: 700; margin-bottom: 8px; }
+.toc-wrap a { text-decoration: none; color: #0b5394; }
+
+/* Author Disclaimer */
+.author-disclaimer {
+  background: #e8f5e9;
+  border-left: 5px solid #388e3c;
+  padding: 14px 18px;
+  margin: 25px 0;
+  border-radius: 6px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #2a2a2a;
+}
+
+/* TL;DR Block */
+.tldr {
+  background: #e8f4ff;
+  border-left: 5px solid #2196f3;
+  padding: 16px 20px;
+  margin: 18px 0 22px;
+  border-radius: 8px;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+/* Impact Section */
+.impact p { margin: 10px 0; }
+.impact ul { margin: 6px 0 14px 1.25em; }
+.impact ul li { margin: 8px 0; }
+.impact ul ul { margin-left: 1.15em; list-style: circle; }
+.impact .example {
+  background: #fafcff;
+  border-left: 4px solid #7aa7ff;
+  padding: 10px 12px;
+  margin: 8px 0 16px;
+  border-radius: 6px;
+}
+.impact .math { font-family: Consolas, Monaco, monospace; white-space: pre-wrap; margin-left: 1.25em; }
+.impact .label { display: block; font-weight: 700; margin: 12px 0 6px; }
+
+/* Indented Sections */
+.amrut-post-container .indent-2 { padding-left: 2em !important; }
+.amrut-post-container .indent-2 p,
+.amrut-post-container .indent-2 ul,
+.amrut-post-container .indent-2 ol,
+.amrut-post-container .indent-2 blockquote,
+.amrut-post-container .indent-2 .example,
+.amrut-post-container .indent-2 .math { margin-left: 0 !important; }
+
+/* Chalk Blackboard Block */
+.chalk-board {
+  background: #111;
+  color: #fff !important;
+  border: 14px solid #8B4513;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin: 18px 0;
+  box-shadow: inset 0 0 6px rgba(255,255,255,0.05), 0 0 6px rgba(0,0,0,0.5);
+  position: relative;
+  font-family: 'Courier New', monospace;
+}
+.chalk-board:before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 20%, rgba(255,255,255,0.04), transparent 60%),
+    radial-gradient(ellipse at 80% 70%, rgba(255,255,255,0.03), transparent 65%);
+  pointer-events: none;
+}
+.chalk-title {
+  font-weight: 900; font-size: 20px; text-align: center; margin-bottom: 12px;
+  color: #fff !important; text-transform: uppercase;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.08), 0 0 4px rgba(255,255,255,0.25);
+  border-bottom: 1px dashed rgba(255,255,255,0.25); padding-bottom: 6px;
+}
+.chalk-table, .chalk-table th, .chalk-table td {
+  color: #fff !important; border: 1px dashed rgba(255,255,255,0.4); padding: 8px;
+}
+.chalk-header-strip {
+  background: rgba(255,255,255,0.1); padding: 8px 12px; text-align: center;
+  font-weight: 700; font-size: 16px; color: #fff !important; text-shadow: 0 0 3px rgba(255,255,255,0.4);
+  border-bottom: 1px dashed rgba(255,255,255,0.4); margin-bottom: 12px;
+}
+
+/* Hero Image */
+.hero-figure { margin: 16px 0; text-align: center; }
+.hero-figure img {
+  max-width: 100%; height: auto; display: block; margin: 0 auto;
+  border: 1px solid #3d85c6; border-radius: 6px;
+}
+.hero-figure figcaption {
+  background: #fff9e6; color: #0b5394; border: 1px solid #f4b400;
+  border-radius: 6px; padding: 8px; font-size: 14px;
+}
+
+/* Featured 2-Up */
+.amrut-post-container .featured-2up { margin: 32px 4px; }
+.featured-2up-title { font-size: 20px; margin-bottom: 14px; color: #0b5394; font-family: 'Segoe UI', sans-serif; }
+.featured-2up-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+@media (max-width: 640px){ .featured-2up-grid { grid-template-columns: 1fr; } }
+.featured-card {
+  display: block; background: #fff; border: 2px solid #ddd; border-radius: 8px;
+  padding: 10px; text-decoration: none; transition: box-shadow .2s, transform .2s;
+}
+.featured-card:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.07); transform: translateY(-2px); }
+.featured-card:focus-visible { outline: 2px solid #0b5394; outline-offset: 3px; }
+.featured-card figure { margin: 0; display: grid; grid-template-columns: 120px 1fr; gap: 10px; align-items: start; }
+.featured-card img {
+  width: 120px; height: 120px; object-fit: cover;
+  border: 1px solid #3d85c6; border-radius: 6px; display: block;
+}
+.featured-card figcaption { font-family: 'Segoe UI', sans-serif; font-weight: 600; color: #1c1c1c; line-height: 1.3; }
+.featured-card .desc { font-weight: normal; font-size: 14px; color: #555; margin-top: 4px; }
+
+/* Note text */
+.note { font-size:13px; color:#555; margin-top:8px; }
+
+/* CTA Box */
+.cta-box {
+  background:#fff3cd; border-left:6px solid #ff9800; padding:20px; margin:30px 0;
+  border-radius:8px; font-size:18px; line-height:1.7; font-family:'Segoe UI', sans-serif;
+}
+
+/* Universal image safety */
+.amrut-post-container img { max-width:100%; height:auto; }
+
+/* Motion preference */
+@media (prefers-reduced-motion: reduce){
+  .featured-card{ transition:none; }
+  .featured-card:hover{ transform:none; }
+}
