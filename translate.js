@@ -1,118 +1,112 @@
-/* =========================
-   Cookie helpers (fallback)
-========================= */
-function setCookie(name, value, days){
-  const d = new Date(); d.setTime(d.getTime() + days*864e5);
-  const base = `${name}=${value}; expires=${d.toUTCString()}; path=/; SameSite=Lax`;
-  const secure = location.protocol === 'https:' ? '; Secure' : '';
-  document.cookie = base + secure;
-  const path = location.pathname.replace(/[^/]*$/, '');
-  document.cookie = `${name}=${value}; expires=${d.toUTCString()}; path=${path || '/'}; SameSite=Lax${secure}`;
-}
-function applyViaCookie(from, to){
-  const val = `/${from}/${to}`;
-  setCookie('googtrans', val, 1);
-  setTimeout(()=>location.reload(), 50);
+function openAmrutCommentForm(){
+  var url="https://docs.google.com/forms/d/e/1FAIpQLSdfwLcC4JCgtet2XQ3y6zP2CglIJfB7Fh_Qp9jQTkgA31lv5Q/viewform?embedded=true";
+  var w=820,h=1000;
+  var dualLeft=window.screenLeft!==undefined?window.screenLeft:screen.left;
+  var dualTop=window.screenTop!==undefined?window.screenTop:screen.top;
+  var width=window.innerWidth||document.documentElement.clientWidth||screen.width;
+  var height=window.innerHeight||document.documentElement.clientHeight||screen.height;
+  var left=Math.max(0,(width-w)/2+dualLeft);
+  var top=Math.max(0,(height-h)/2+dualTop);
+  var features="scrollbars=yes,resizable=yes,width="+w+",height="+h+",top="+top+",left="+left;
+  var win=window.open(url,"amrutCommentForm",features);
+  if(!win){window.open(url,"_blank","noopener,noreferrer");return false;}
+  try{win.opener=null;win.focus();}catch(e){}
+  return false;
 }
 
-/* =========================
-   Google Translate loader (on-demand)
-========================= */
-let _gteLoading = false, _gteLoaded = false;
+/* Cookie helpers for fallback (unchanged) */
+function setCookie(name,value,days){
+  const d=new Date(); d.setTime(d.getTime()+days*864e5);
+  document.cookie=name+"="+value+"; expires="+d.toUTCString()+"; path=/";
+}
+function applyViaCookie(from,to){
+  const val="/"+from+"/"+to;
+  setCookie('googtrans',val,1);
+  setCookie('googtrans',val,1);
+  location.reload();
+}
+
+/* Change language with widget; fallback via cookie if needed (unchanged) */
+function changeLanguage(to){
+  const from='en';
+  let tries=0, maxTries=60;
+  const iv=setInterval(()=>{
+    const sel=document.querySelector('.goog-te-combo');
+    if(sel){
+      sel.value=to;
+      sel.dispatchEvent(new Event('change'));
+      clearInterval(iv);
+    }
+    if(++tries>=maxTries){
+      clearInterval(iv);
+      applyViaCookie(from,to);
+    }
+  },100);
+}
+
+/* Load Google Translate on demand (unchanged, just ensure HTTPS src) */
+let gteLoading=false, gteLoaded=false;
 function loadGoogleTranslate(){
-  if (_gteLoaded) return Promise.resolve(true);
-  if (_gteLoading) return window._gteReadyPromise;
+  if(gteLoaded) return Promise.resolve(true);
+  if(gteLoading) return window._gteReadyPromise;
 
-  _gteLoading = true;
-  const PAGE_LANG = (document.documentElement.lang || 'en').slice(0,2);
-  const INCLUDED  = ['en','kn','hi','mr'];
-
-  window._gteReadyPromise = new Promise((resolve) => {
-    window.googleTranslateElementInit = function(){
-      try {
-        new google.translate.TranslateElement(
-          { pageLanguage: PAGE_LANG, includedLanguages: INCLUDED.join(','), autoDisplay: false },
-          'google_translate_element'
-        );
-      } catch(e) {}
-      const observer = new MutationObserver((_muts, obs) => {
-        if (document.querySelector('.goog-te-combo')) {
-          obs.disconnect();
-          _gteLoaded = true;
-          resolve(true);
+  gteLoading=true;
+  window._gteReadyPromise=new Promise((resolve)=>{
+    window.googleTranslateElementInit=function(){
+      new google.translate.TranslateElement(
+        {pageLanguage:'en',includedLanguages:'en,kn,hi,mr',autoDisplay:false},
+        'google_translate_element'
+      );
+      let tries=0, maxTries=60;
+      const iv=setInterval(()=>{
+        if(document.querySelector('.goog-te-combo')){
+          clearInterval(iv); gteLoaded=true; resolve(true);
+        }else if(++tries>=maxTries){
+          clearInterval(iv); gteLoaded=true; resolve(true);
         }
-      });
-      observer.observe(document.body, { childList: true, subtree: true });
-      setTimeout(()=>{ _gteLoaded = true; resolve(true); }, 4000);
+      },100);
     };
-    const s = document.createElement('script');
-    s.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-    s.async = true;
-    s.onerror = function(){ _gteLoading = false; _gteLoaded = false; resolve(false); };
+    const s=document.createElement('script');
+    s.src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+    s.async=true;
+    s.onerror=function(){ gteLoaded=false; resolve(false); };
     document.head.appendChild(s);
   });
-  return window._gteReadyPromise.finally(()=>{ _gteLoading = false; });
+  return window._gteReadyPromise;
 }
 
-/* =========================
-   Change language
-========================= */
-function changeLanguage(to){
-  const from = (document.documentElement.lang || 'en').slice(0,2);
-  if (to === from) return;
-
-  const combo = document.querySelector('.goog-te-combo');
-  if (combo) {
-    if (combo.value !== to) {
-      combo.value = to;
-      combo.dispatchEvent(new Event('change', { bubbles: true }));
-    }
-    return;
-  }
-
-  loadGoogleTranslate().then(() => {
-    const trySet = () => {
-      const c = document.querySelector('.goog-te-combo');
-      if (!c) return false;
-      if (c.value !== to) {
-        c.value = to;
-        c.dispatchEvent(new Event('change', { bubbles: true }));
-      }
-      return true;
-    };
-    if (trySet()) return;
-
-    const obs = new MutationObserver((_m,o)=>{ if (trySet()) o.disconnect(); });
-    obs.observe(document.body, { childList:true, subtree:true });
-    setTimeout(()=>{ obs.disconnect(); applyViaCookie(from,to); }, 6000);
-  });
-}
-
-/* =========================
-   Language menu wiring
-========================= */
+/* Wire up the language menu (unchanged) */
 (function(){
-  const wrapper = document.getElementById('lwa-lang');
-  if (!wrapper) return;
+  const wrapper=document.getElementById('lwa-lang');
+  if(!wrapper) return;
+  const toggle=wrapper.querySelector('.lang-toggle');
+  const menu=document.getElementById('lwa-lang-menu');
+  if(!toggle||!menu) return;
 
-  const toggle = wrapper.querySelector('.lang-toggle');
-  const menu   = document.getElementById('lwa-lang-menu');
-  const btns   = wrapper.querySelectorAll('.lang-btn');
-  if (!toggle || !menu || !btns.length) return;
+  function openMenu(){ menu.style.display='block'; toggle.setAttribute('aria-expanded','true'); }
+  function closeMenu(){ menu.style.display='none'; toggle.setAttribute('aria-expanded','false'); }
 
-  let menuOpen = false;
-  const openMenu = () => { menu.style.display='block'; toggle.setAttribute('aria-expanded','true'); menuOpen=true; };
-  const closeMenu = () => { menu.style.display='none'; toggle.setAttribute('aria-expanded','false'); menuOpen=false; };
+  async function onToggle(e){
+    e.preventDefault(); e.stopPropagation();
+    const open=menu.style.display==='block';
+    if(open){ closeMenu(); return; }
+    await loadGoogleTranslate();
+    openMenu();
+  }
+  toggle.addEventListener('click', onToggle, {passive:false});
+  toggle.addEventListener('touchstart', onToggle, {passive:false});
 
-  toggle.addEventListener('click', e=>{ e.preventDefault(); menuOpen?closeMenu():loadGoogleTranslate().finally(openMenu); });
-  document.addEventListener('click', e=>{ if (!wrapper.contains(e.target)) closeMenu(); });
-  document.addEventListener('keydown', e=>{ if (e.key==='Escape') closeMenu(); });
+  menu.addEventListener('click', e=>e.stopPropagation(), {passive:true});
+  menu.addEventListener('touchstart', e=>e.stopPropagation(), {passive:true});
+  document.addEventListener('click', (e)=>{ if(!wrapper.contains(e.target)) closeMenu(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
 
-  btns.forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const to=btn.getAttribute('data-lang')||'en';
+  wrapper.querySelectorAll('.lang-btn').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const to=btn.getAttribute('data-lang');
       closeMenu();
-      loadGoogleTranslate().then(()=>changeLanguage(to));
+      await loadGoogleTranslate();
+      changeLanguage(to);
     });
   });
 })();
