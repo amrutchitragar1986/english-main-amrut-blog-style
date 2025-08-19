@@ -548,3 +548,25 @@
 }
 
 
+  
+  
+  /* 1) Open state: show the menu when JS adds .is-open on wrapper */
+.lang-switch.is-open .lang-menu { display: block; }
+
+/* 2) Keyboard focus rings (a11y) */
+.lang-toggle:focus,
+.lang-btn:focus { outline: 2px solid #0b5394; outline-offset: 2px; }
+
+/* 3) Make sure the dropdown sits above other widgets */
+.lang-menu { z-index: 2147483647; } /* was 999; bump to be safe over iframes */
+
+/* 4) Mobile nicety: center the control on narrow screens */
+@media (max-width: 480px){
+  .lang-switch { text-align: center; }
+}
+
+/* 5) Optional: prevent brand/UI from being translated */
+.notranslate, .skip-translate { translate: none; } /* class to apply on elements you don’t want GT to touch */
+
+  
+
