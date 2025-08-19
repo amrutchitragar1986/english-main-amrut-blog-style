@@ -225,3 +225,58 @@
   .featured-card{ transition:none; }
   .featured-card:hover{ transform:none; }
 }
+
+/* ===============================
+   Flow Chart / Timeline Steps
+   =============================== */
+.amrut-post-container .flow-steps{
+  counter-reset: step;
+  list-style: none;
+  margin: 16px 0 24px;
+  padding: 0;
+}
+.amrut-post-container .flow-steps li{
+  counter-increment: step;
+  position: relative;
+  background: #f7fbff;
+  border: 1px solid #d7eafe;
+  border-radius: 10px;
+  padding: 16px 18px 16px 58px;
+  margin: 0;
+}
+.amrut-post-container .flow-steps li + li{ margin-top: 14px; }
+
+/* Number circle */
+.amrut-post-container .flow-steps li::before{
+  content: counter(step);
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: #0b5394; /* Amrut blue */
+  color: #fff;
+  display: grid; place-items: center;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Connector line between cards */
+.amrut-post-container .flow-steps li:not(:last-child)::after{
+  content: "";
+  position: absolute;
+  left: 31.5px; /* centers under number circle */
+  top: calc(50% + 20px);
+  height: 22px; width: 2px;
+  background: #d7eafe;
+}
+
+/* Title + Description inside each node */
+.amrut-post-container .flow-title{
+  font-weight: 700; color: #0b5394; margin-bottom: 6px;
+}
+.amrut-post-container .flow-desc{ margin: 0; color: #2a2a2a; }
+
+
+
