@@ -547,6 +547,22 @@
   overflow:hidden !important;
 }
 
+ /* Small variant for action buttons */
+.amrut-gold-btn.small {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+/* Smaller toggle for language */
+.lang-toggle.small {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+/* Inline language switch so it sits in the flex row */
+.lang-switch.inline {
+  margin: 0; /* remove the top margin */
+}
 
   
   
