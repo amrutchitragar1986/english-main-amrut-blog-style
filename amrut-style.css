@@ -584,5 +584,35 @@
 /* 5) Optional: prevent brand/UI from being translated */
 .notranslate, .skip-translate { translate: none; } /* class to apply on elements you don’t want GT to touch */
 
-  
+  /* Blue variant for Comment */
+.amrut-blue-btn {
+  background: #0b5394;   /* same as language */
+  color: #fff;
+  border: 0;
+  border-radius: 9999px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: filter 0.2s ease, transform 0.1s ease;
+}
+.amrut-blue-btn:hover {
+  filter: brightness(1.1);
+}
+.amrut-blue-btn:active {
+  transform: translateY(1px);
+}
+
+/* Small variant */
+.amrut-blue-btn.small,
+.lang-toggle.small {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
 
