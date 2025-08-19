@@ -278,5 +278,35 @@
 }
 .amrut-post-container .flow-desc{ margin: 0; color: #2a2a2a; }
 
+           /* ===============================
+   Table of Contents (Upgraded)
+   =============================== */
+.toc-wrap {
+  background: #eaf4ff;               /* light blue bg */
+  border-left: 6px solid #0b5394;    /* dark blue strip */
+  padding: 18px 20px;
+  border-radius: 6px;
+  margin: 22px 0 28px;
+  font-family: 'Segoe UI', sans-serif;
+}
+.toc-wrap .toc-title {
+  font-weight: 700;
+  font-size: 18px;
+  color: #0b5394;
+  margin-bottom: 10px;
+}
+.toc-wrap ol {
+  margin: 0;
+  padding-left: 20px;
+}
+.toc-wrap a {
+  color: #0b5394;
+  text-decoration: none;
+}
+.toc-wrap a:hover {
+  color: #c62828; /* hover red for contrast */
+  text-decoration: underline;
+} 
+
 
 
