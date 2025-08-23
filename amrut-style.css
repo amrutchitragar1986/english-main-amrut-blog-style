@@ -9,6 +9,9 @@
   padding: 0 4px;
 }
 
+
+
+
 /* Headings */
 .amrut-post-container h1 {
   text-align: left;
@@ -613,6 +616,67 @@
 .lang-toggle.small {
   padding: 6px 12px;
   font-size: 13px;
+}
+
+
+/* ================================================
+   Indic Fonts Patch – Kannada & Marathi (Devanagari)
+   Purpose: Keep English on Segoe/UI (GitHub-like),
+            auto-switch only Indic glyphs to Noto Sans
+   Placement: Append AFTER your existing CSS
+   Author: You (Amrut) – August 2025
+   ================================================ */
+
+/* 0) Token: keep current English/system stack the same */
+:root{
+  --amrut-latin-stack: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                       Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  /* Script-specific families (loaded via <head>) */
+  --amrut-devanagari: "Noto Sans Devanagari"; /* Marathi/Hindi/etc */
+  --amrut-kannada: "Noto Sans Kannada";       /* Kannada */
+}
+
+/* 1) Unify font-family at the container level.
+      English stays on Segoe/system; Indic picks Noto automatically. */
+.amrut-post-container{
+  font-family: var(--amrut-latin-stack),
+               var(--amrut-devanagari),
+               var(--amrut-kannada),
+               sans-serif;
+  /* Better shaping/smoothing, esp. for Indic scripts */
+  font-feature-settings: "liga" 1, "clig" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 2) Ensure elements that previously force 'Segoe UI' now inherit.
+      (Prevents pockets that ignore our unified stack.) */
+.amrut-post-container h1,
+.amrut-post-container h2,
+.amrut-post-container .featured-2up-title,
+.amrut-post-container figcaption,
+.amrut-post-container .featured-card figcaption{
+  font-family: inherit;
+}
+
+/* 3) Optional language-aware helpers.
+      If you set lang="mr" or lang="kn" on blocks, these force Noto. */
+.amrut-post-container :lang(mr),
+.amrut-post-container .mr{ /* Marathi (Devanagari) */
+  font-family: var(--amrut-devanagari), var(--amrut-latin-stack), sans-serif;
+}
+.amrut-post-container :lang(kn),
+.amrut-post-container .kn{ /* Kannada */
+  font-family: var(--amrut-kannada), var(--amrut-latin-stack), sans-serif;
+}
+
+/* 4) Keep GitHub-like monospace intact for code (no visual change). */
+.amrut-post-container pre,
+.amrut-post-container code,
+.amrut-post-container kbd,
+.amrut-post-container samp{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+               "Liberation Mono", "Courier New", monospace !important;
 }
 
 
