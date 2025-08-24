@@ -1,0 +1,219 @@
+/* ===========================
+   Amrut Newspaper Style – LWA Sunday Edition (v1.1a final)
+   =========================== */
+
+:root{
+  --lwa-bg:#ffffff;
+  --lwa-ink:#1f1f1f;
+  --lwa-muted:#5a5a5a;
+  --lwa-blue:#0b5394;
+  --lwa-gold:#D4AF37;
+  --lwa-accent:#e53935;
+  --lwa-line:#e5e5e5;
+  --lwa-fig-bg:#fff9e6;
+  --lwa-fig-text:#0b5394;
+}
+
+/* Base */
+html,body{margin:0;padding:0;background:var(--lwa-bg);color:var(--lwa-ink)}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Sans Kannada","Baloo Tamma 2","Tunga","Segoe UI",Arial,sans-serif;
+  line-height:2.0;font-size:18px;
+}
+img{max-width:100%;height:auto;display:block}
+
+/* Paper frame */
+.lwa-paper{
+  max-width:1100px;margin:20px auto;background:#fdfaf3;
+  border:3px solid var(--lwa-gold);box-shadow:0 8px 26px rgba(0,0,0,.07);
+}
+
+/* Masthead */
+.lwa-mast{
+  padding:12px 18px 14px;border-bottom:4px double var(--lwa-line);
+  position:relative;background:#fff
+}
+.lwa-mast .mast-top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.mast-brand{display:flex;align-items:center;gap:12px}
+.mast-logo{width:64px;height:64px;border-radius:0}
+.mast-logo img{width:auto;height:64px;object-fit:contain;display:block}
+.mast-title{
+  font-size:30px;font-weight:700;color:var(--lwa-blue);text-transform:uppercase;
+  margin:0 0 4px;letter-spacing:.2px;line-height:1.15;
+}
+.mast-sub{font-size:18px;color:var(--lwa-muted);margin-top:2px;line-height:1.6}
+.mast-badge{
+  background:var(--lwa-gold);color:#111;font-weight:800;padding:6px 10px;
+  border-radius:6px;text-transform:uppercase;font-size:12px;
+}
+
+/* Date strip */
+.date-strip{
+  margin-top:10px;padding:8px 12px;background:#fafafa;border:1px solid var(--lwa-line);
+  display:flex;gap:14px;flex-wrap:wrap;align-items:center;font-size:14px;color:#333
+}
+.date-strip .dot{
+  display:inline-block;width:6px;height:6px;background:var(--lwa-gold);border-radius:50%;
+}
+
+/* Lead banner */
+.lead-banner{
+  margin:12px 18px 0;padding:10px 14px;border-left:8px solid #e53935;
+  background:#fff3cd;font-weight:700;color:#7a1010;text-transform:uppercase
+}
+.lead-banner::before{content:"Sunday Special ";font-weight:900;color:#e53935;margin-right:10px}
+
+/* Grid */
+.lwa-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px;padding:18px}
+@media (max-width:980px){.lwa-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:680px){.lwa-grid{grid-template-columns:1fr}}
+
+/* Articles */
+.article{border:1px solid var(--lwa-line);padding:14px;background:#fff;content-visibility:auto;contain-intrinsic-size:800px}
+.article.hero{grid-column:1 / -1}
+.kicker{color:var(--lwa-accent);font-weight:800;text-transform:uppercase;font-size:12px;letter-spacing:.5px}
+.headline{font-size:28px;line-height:1.25;font-weight:900;margin:6px 0 10px;color:#111}
+.headline.small{font-size:20px}
+.headline--hero{
+  font-size:38px;font-weight:900;text-align:center;color:var(--lwa-blue);
+  margin:28px 0;line-height:1.4;letter-spacing:1px;text-transform:uppercase;
+  border-bottom:4px double var(--lwa-gold);padding-bottom:12px;
+}
+.dek{color:#333;font-size:17px;margin:0 0 10px}
+.byline{font-size:13px;color:var(--lwa-muted);border-top:1px solid var(--lwa-line);padding-top:8px;margin-top:8px}
+
+/* Body copy */
+.body{
+  font-size:18px;line-height:1.9;font-family:'Segoe UI',sans-serif;color:#2a2a2a;padding:0 4px
+}
+.body p {
+  margin:16px 0;
+  line-height:1.95;
+}
+.body ul,.body ol {
+  margin:16px 0 20px 26px;
+  padding:0;
+}
+.body ul li,.body ol li {
+  margin-bottom:14px;
+  line-height:1.9;
+}
+.rule{border-top:1px solid var(--lwa-line);margin:12px 0}
+.body strong{color:#000}
+.body table{
+  margin:20px 0;border:1px solid #ddd;width:100%;font-family:Arial,sans-serif;
+  font-size:16px;border-collapse:collapse
+}
+.body table th,.body table td{border:1px solid #ccc;padding:10px;text-align:left}
+.body blockquote{
+  background:#f0f8ff;border-left:4px solid #007acc;margin:20px 0;padding:14px 20px;
+  font-style:italic;color:#003366
+}
+
+/* Optional: multi-column for side articles (desktop) */
+.article:not(.hero) .body{column-count:2;column-gap:26px}
+@media (max-width:980px){.article:not(.hero) .body{column-count:1}}
+
+/* Figures */
+figure{margin:10px 0}
+figure img{border:1.5px solid #3d85c6;border-radius:6px}
+figcaption{
+  background:var(--lwa-fig-bg);color:var(--lwa-fig-text);
+  padding:7px 10px;font-size:13px;line-height:1.5;border-left:4px solid var(--lwa-blue)
+}
+@media (max-width:600px){figcaption{font-size:12px}}
+
+/* Aspect-ratio helper */
+.ratio{position:relative;width:100%;overflow:hidden}
+.ratio::before{content:"";display:block}
+.ratio-16x9::before{padding-top:56.25%}
+.ratio > img,
+.ratio picture,
+.ratio picture > img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover
+}
+
+/* Extras */
+.pullquote{border:2px solid var(--lwa-gold);padding:14px;font-weight:700;font-size:18px;background:#fffef7}
+.infobox{background:#f6f9ff;border:1px solid #d7e3ff;padding:12px;font-size:16px}
+
+/* Tags */
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.tag{border:1px solid var(--lwa-line);padding:4px 8px;font-size:12px;border-radius:14px;background:#fafafa}
+.tag:focus{outline:2px solid var(--lwa-blue);outline-offset:2px}
+
+/* Footer */
+.lwa-footer{
+  border-top:4px double var(--lwa-line);padding:12px 18px;display:flex;
+  justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:14px;color:var(--lwa-muted)
+}
+
+/* Compact date pill */
+.lwa-date-pill{background:#f7f7f7;border:1px solid var(--lwa-line);border-radius:6px;padding:10px 12px}
+
+/* Mobile refinements */
+@media (max-width:600px){
+  .lwa-mast{padding:10px 14px}
+  .mast-logo{width:48px;height:48px}
+  .mast-logo img{height:48px}
+  .mast-title{font-size:26px;line-height:1.1;margin:0}
+  .mast-sub{font-size:14px}
+  .lwa-date-pill{font-size:13px;padding:8px 10px}
+  .lead-banner{padding:10px 12px}
+  .headline.small{font-size:18px}
+  .headline--hero{font-size:30px}
+}
+
+/* Action Bar */
+.amrut-action-bar{
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center;
+  margin:24px 0 8px;background:#fff;padding:8px 12px;border-top:1px solid var(--lwa-line);border-bottom:1px solid var(--lwa-line)
+}
+.amrut-action-bar button{font-family:inherit;line-height:1;cursor:pointer}
+
+/* Comment button */
+.amrut-gold-btn{
+  background:var(--lwa-gold);color:#111;border:0;border-radius:9999px;padding:10px 16px;
+  font-size:14px;font-weight:800;box-shadow:0 2px 6px rgba(0,0,0,.12);
+  display:inline-flex;align-items:center;gap:8px;position:relative;z-index:2
+}
+.amrut-gold-btn:hover{filter:brightness(1.07)}
+.amrut-gold-btn:active{transform:translateY(1px)}
+
+/* Language Switcher */
+.lang-switch{text-align:right;margin:15px 0;position:relative;font-family:Arial,sans-serif}
+.lang-toggle{background:#0b5394;color:#fff;padding:8px 14px;font-size:14px;font-weight:bold;border:0;border-radius:6px;cursor:pointer}
+.lang-toggle:focus{outline:2px solid var(--lwa-blue);outline-offset:2px}
+.lang-menu{
+  display:none;position:absolute;right:0;margin-top:6px;background:#fff;border:1px solid #ccc;
+  border-radius:6px;padding:10px;box-shadow:0 4px 10px rgba(0,0,0,.1);z-index:999;width:250px
+}
+.lang-options{display:flex;flex-wrap:wrap;gap:8px}
+.lang-btn{background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:6px 10px;font-size:13px;cursor:pointer}
+.lang-btn:hover{background:#e8e8e8}
+.lang-btn:focus{outline:2px solid var(--lwa-blue);outline-offset:2px}
+.lang-note{font-size:12px;color:#555;margin-top:8px}
+
+/* Figure helpers */
+.figure-responsive{max-width:920px;margin:16px auto}
+.figure-center{text-align:center}
+.responsive-img{width:100%;height:auto;display:block}
+@media (max-width:600px){.figure-responsive{max-width:96vw}}
+
+/* Anchor offset */
+#disclaimer{scroll-margin-top:24px}
+
+/* Links */
+a{color:var(--lwa-blue);text-decoration:none}
+a:hover,a:focus{text-decoration:underline;outline:0}
+
+/* Reduced motion respect */
+@media (prefers-reduced-motion: reduce){
+  *{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important;
+    scroll-behavior:auto !important;
+  }
+}
