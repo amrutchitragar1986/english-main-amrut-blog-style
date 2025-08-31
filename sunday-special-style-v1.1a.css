@@ -87,18 +87,9 @@ img{max-width:100%;height:auto;display:block}
 .body{
   font-size:18px;line-height:1.9;font-family:'Segoe UI',sans-serif;color:#2a2a2a;padding:0 4px
 }
-.body p {
-  margin:16px 0;
-  line-height:1.95;
-}
-.body ul,.body ol {
-  margin:16px 0 20px 26px;
-  padding:0;
-}
-.body ul li,.body ol li {
-  margin-bottom:14px;
-  line-height:1.9;
-}
+.body p { margin:16px 0; line-height:1.95; }
+.body ul,.body ol { margin:16px 0 20px 26px; padding:0; }
+.body ul li,.body ol li { margin-bottom:14px; line-height:1.9; }
 .rule{border-top:1px solid var(--lwa-line);margin:12px 0}
 .body strong{color:#000}
 .body table{
@@ -217,3 +208,135 @@ a:hover,a:focus{text-decoration:underline;outline:0}
     scroll-behavior:auto !important;
   }
 }
+
+/* =======================================================
+   Related Topics – minimal section spacing
+   (kept tiny and generic so it doesn't conflict elsewhere)
+   ======================================================= */
+.related-section { margin: 20px 0; }
+
+/* ================================================
+   Start: Related Topics Slider – Scoped to #related1
+   Compatible with existing HTML in your post
+   ================================================ */
+
+#related1.related-slider{
+  /* Theme tokens (override per-instance if needed) */
+  --lwa-accent: #0b5394;
+  --lwa-accent-hover: #064579;
+  --lwa-border: #ddd;
+  --lwa-text: #444;
+  --lwa-shadow: 0 2px 6px rgba(0,0,0,.15);
+
+  position: relative;
+  max-width: 600px;
+  margin: 20px auto;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--lwa-border);
+  border-radius: 10px;
+  min-height: 230px; /* helps avoid small layout shifts */
+}
+
+#related1 .related-track{
+  display: flex;
+  transition: transform .5s ease-in-out;
+  will-change: transform;
+}
+
+#related1 .related-card{
+  min-width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 14px;
+}
+
+#related1 .related-card a{
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+#related1 .related-card img{
+  width: 120px;
+  aspect-ratio: 12 / 11; /* replaces fixed height to reduce CLS */
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+  display: block;
+}
+
+#related1 .related-card h3{
+  font-size: 17px;
+  margin: 8px 0 4px;
+  color: var(--lwa-accent);
+  line-height: 1.25;
+}
+
+#related1 .related-card p{
+  font-size: 14px;
+  color: var(--lwa-text);
+  line-height: 1.5;
+  margin: 6px auto 0;
+  max-width: 80%;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Navigation buttons */
+#related1 .related-btn{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background: var(--lwa-accent);
+  color: #fff;
+  font-size: 16px;
+  box-shadow: var(--lwa-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2; /* ensure buttons sit above images/text */
+}
+
+#related1 .related-btn:hover{ background: var(--lwa-accent-hover); }
+#related1 .related-prev{ left: 10px; }
+#related1 .related-next{ right: 10px; }
+#related1 .related-btn:focus{ outline: 2px solid #99c; outline-offset: 2px; }
+
+/* Reduced-motion preference */
+@media (prefers-reduced-motion: reduce){
+  #related1 .related-track{ transition: none; }
+}
+
+/* Dark mode polish */
+@media (prefers-color-scheme: dark){
+  #related1.related-slider{
+    background: #0f1115;
+    border-color: #333;
+  }
+  #related1 .related-card p{ color: #c8c8c8; }
+  #related1 .related-card img{ border-color: #444; }
+}
+
+/* Small screens */
+@media (max-width: 480px){
+  #related1 .related-card img{ width: 110px; aspect-ratio: 11 / 10; }
+  #related1 .related-card h3{ font-size: 16px; }
+  #related1 .related-card p{
+    font-size: 13px;
+    -webkit-line-clamp: 2;
+  }
+}
+
+/* ================================================
+   End: Related Topics Slider – Scoped to #related1
+   ================================================ */
