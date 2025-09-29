@@ -679,4 +679,93 @@
                "Liberation Mono", "Courier New", monospace !important;
 }
 
+/* Mobile responsive - stack items vertically on small screens */
+@media (max-width: 600px) {
+  .author-disclaimer > div:first-child {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+  
+  .author-disclaimer > div:first-child > span:nth-child(2),
+  .author-disclaimer > div:first-child > span:nth-child(4) {
+    display: none; /* Hide separator pipes on mobile */
+  }
+}
+   
+   
+   .amrut-post-container {
+  text-align: justify;
+  text-justify: inter-word;
+}
+   
+   .lwa-footer {
+  background: #f5f5f5;
+  border-top: 2px solid #0b5394;
+  padding: 20px;
+  margin-top: 40px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
 
+.lwa-footer div {
+  margin: 5px 0;
+}
+
+.lwa-footer a {
+  color: #0b5394;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.lwa-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 600px) {
+  .lwa-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .lwa-footer div {
+    margin: 0;
+  }
+}
+   
+.lwa-footer {
+  background: #f5f5f5;
+  border-top: 2px solid #0b5394;
+  padding: 20px;
+  margin-top: 40px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
+
+.lwa-footer div {
+  margin: 5px 0;
+}
+
+.lwa-footer a {
+  color: #0b5394;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.lwa-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 600px) {
+  .lwa-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .lwa-footer div {
+    margin: 0;
+  }
+}   
